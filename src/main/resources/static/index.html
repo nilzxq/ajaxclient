@@ -3,8 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css" href="jasmine-2.8.0/jasmine.css">
+
+<script src="jasmine-2.8.0/jasmine.js"></script>
+<script src="jasmine-2.8.0/jasmine-html.js"></script>
+<script src="jasmine-2.8.0/boot.js"></script>
 </head>
 <body>
-
+<a href="#" onclick="get1()">发生get1请求</a>
+<script>
+function get1(){
+	$.getJSON("http://localhost:8080/test/get1").then(
+			function(result){
+				console.log(result);
+			});
+}
+</script>
 </body>
 </html>
