@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="jquery-1.11.3.min.js"></script>
+<script src="jquery-1.11.3.js"></script>
 <link rel="stylesheet" type="text/css" href="jasmine-2.8.0/jasmine.css">
 
 <script src="jasmine-2.8.0/jasmine.js"></script>
@@ -57,8 +57,8 @@ describe("ajax跨越完全讲解", function() {
 		$.ajax({
 			url: base +"/get1",
 			dataType: "jsonp",
-			jsonp: "callback2",
-			cache:true,
+			jsonp: "callback",
+			//cache:true,
 			success: function(json){
 				result = json;
 			}
@@ -74,6 +74,32 @@ describe("ajax跨越完全讲解", function() {
 			done();
 		}, 100);
 	});
+	
+	it("postJson请求", function(done) {
+		// 服务器返回的结果
+		var result;
+
+		$.ajax({
+			type:"post",
+			url:base+"/postJson",
+			contentType:"application/json;charset=utf-8",
+			data:JSON.stringify({name:"zxq"}),
+			success:function(json){
+				result=json;
+			}
+		});
+
+		// 由于是异步请求，需要使用setTimeout(延迟)来校验
+		setTimeout(function() {
+			expect(result).toEqual({
+				"data" : "postJson zxq"
+			});
+
+			// 校验完成，通知jasmine框架
+			done();
+		}, 100);
+	});
+	
 });	
 	
 </script>
