@@ -100,6 +100,32 @@ describe("ajax跨越完全讲解", function() {
 		}, 100);
 	});
 	
+	
+	it("getCookie请求", function(done) {
+		// 服务器返回的结果
+		var result;
+
+		$.ajax({
+			type:"get",
+			url:base+"/getCookie",
+			xhrFields:{
+				withCredentials:true
+			},
+			success:function(json){
+				result=json;
+			}
+		});
+
+		// 由于是异步请求，需要使用setTimeout(延迟)来校验
+		setTimeout(function() {
+			expect(result).toEqual({
+				"data" : "getCookie zxq"
+			});
+
+			// 校验完成，通知jasmine框架
+			done();
+		}, 100);
+	});
 });	
 	
 </script>
